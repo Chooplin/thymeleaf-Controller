@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>User Information</title>
+</head>
+<body>
+<h1>form에서 action으로 form의 name 값들을 서버로 요청한 후, 응답으로 해당 화면을 Return! </h1>
+<h2>th:text="${dto.xxx}" = dto의 값(xxx) 꺼내어 화면에 그리기</h2>
+<p>Name: <span th:text="${dto.name}"></span></p>
+<p>Email: <span th:text="${dto.email}"></span></p>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+  <form name="frm" action="/controller" method="post">
+    <h3>Name: <input id="name" name="name"></h3>
+    <h3>Email: <input id="email" name="email"></h3>
+    <button type="submit" id="get-submitBtn">getMapping</button>
+    <button type="button" id="post-submitBtn">등록</button>
+  </form>
+
+  <p id="result">null</p>
+</body>
+
+
+<script>
+  let USER_NAME;
+  let USER_EMAIL;
+
+  $("#post-submitBtn").click(function() {
+      let formData = new FormData(document.frm);
+
+      $.ajax({
+          url: '/rest-controller',   // 요청할 서버url
+          type: 'post',              // 타입 (get, post, put 등등)
+          contentType: false,
+          processData: false,
+          data: formData,
+          // data : JSON.stringify({  // 보낼 데이터 (Object , String, Array)
+          //     "no" : no,
+          //     "name" : name,
+          //     "nick" : nick
+          // }),
+          success: function (result) { // 결과 성공 콜백함수
+              USER_NAME = result.name;
+              USER_EMAIL = result.email;
+              $("#result").val(USER_NAME);
+              $("#result").text(USER_NAME);
+          },
+          error: function (error) { // 결과 에러 콜백함수
+              console.log(error);
+              $("#result").text(JSON.stringify(error));
+          }
+      });
+
+      setInterval(1000, function () {
+        console.log(USER_NAME);
+        console.log(USER_EMAIL);
+      });
+  });
+</script>
+
+</html>
